@@ -61,12 +61,12 @@ public class UserController {
     
     
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable("id") Long id, @Valid @RequestBody User User){
+    public User updateUser(@PathVariable("id") Long id, @Valid @RequestBody User user){
             User dbUser =  userService.getUser(id).orElseThrow(() -> new ModelNotFoundException("User No enocntrado"));
-            dbUser.setName(User.getName());
-            dbUser.setLastName(User.getLastName());
-            dbUser.setAge(User.getAge());
-            dbUser.setEmail(User.getEmail());
+            dbUser.setName(user.getName());
+            dbUser.setLastName(user.getLastName());
+            dbUser.setIdentificationType(user.getIdentificationType());
+            dbUser.setNumberIdentification(user.getNumberIdentification());
             return userService.updateUser(dbUser);
     }
 	

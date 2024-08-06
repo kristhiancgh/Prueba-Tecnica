@@ -13,6 +13,7 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Builder;
@@ -35,19 +36,21 @@ public class User {
     
     @Id
     @Column(name = "USER_ID")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seqUser")
-    @SequenceGenerator(name = "seqUser", allocationSize = 1, sequenceName = "SEQ_USER")
-    @Builder.Default
-    Long id=0L;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Integer id;
+    
+    @NotNull @NotBlank
+    String identificationType;
+    @NotNull @NotBlank
+    String numberIdentification;  
+    
     @NotNull @NotBlank
     String name;
     @NotNull @NotBlank
     String lastName;
     
-    Integer age;
-    @NotBlank(message = "Email es requerido")
-    @Size(min = 5, max = 50)
-    String email;
+    @Builder.Default
+    Date creationUser = new Date();
     
     
 }
